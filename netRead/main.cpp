@@ -10,38 +10,52 @@
 int main()
 {
 	srand(time(NULL));
-	// Create the main window
-	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML window with OpenGL", sf::Style::Default);
-	// Make it the active window for OpenGL calls
-	window.setActive();
+
+	sf::RenderWindow window(sf::VideoMode(1200, 738), "SFML window with OpenGL", sf::Style::Default);
+
+	window.setFramerateLimit(60);
 
 	HttpRequest req;
 
-	int die1 = (1+rand() % 6);
-	int die2 = (1+rand() % 6);
+	int die1 = (1 + rand() % 6);
+	int die2 = (1 + rand() % 6);
 
-	req.postToServer(die1,die2);
-
+	req.postToServer(die1, die2);
 	
+	sf::Texture texture;
+	if (texture.loadFromFile("img/jonathansSkiss.jpg"))
+	{
+		std::cerr << "Failed to load texture";
+	}
+	
+	sf::Sprite tex;
+	tex.setTexture(texture);
+	
+	//window.setSize(sf::Vector2u(texture.getSize().x, texture.getSize().y));
 
 	sf::Font font;
 	if (!font.loadFromFile("fonts/arial.ttf"))
 	{
 		std::cerr << "Failed to load font\n";
 	}
-
-	sf::Text text,text2;
+	sf::Text text, uInput;
 	text.setFont(font);
-	text.setFillColor(sf::Color::Red);
+	uInput.setFont(font);
 	text.setCharacterSize(12);
+	uInput.setCharacterSize(12);
+
+	sf::RectangleShape rect(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+	rect.setOutlineThickness(4.f);
+	rect.setOutlineColor(sf::Color::Red);
+	rect.setPosition(sf::Vector2f(0.f, 0.f));
+	rect.setFillColor(sf::Color::Transparent);
+
+	text.setFillColor(sf::Color::Red);
 	text.setString(req.readFromServer());
+	uInput.setFillColor(sf::Color::Black);
+	uInput.setPosition(rect.getGlobalBounds().left, rect.getGlobalBounds().top);
 
-	text2.setFont(font);
-	text2.setFillColor(sf::Color::Blue);
-	text2.setCharacterSize(12);
-	text2.setString("HEJ!");
-	text2.setPosition(sf::Vector2f(300.f, 0.f));
-
+	sf::String temp;
 
 
 	while (window.isOpen())
@@ -57,15 +71,26 @@ int main()
 			{
 				window.close();
 			}
+
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (event.text.unicode < 128)
+				{
+					temp += event.text.unicode;
+					uInput.setString(temp);
+				}
+			}
 		}
 
-	window.clear(sf::Color::Black);
-	
-	window.draw(text2);
-	window.draw(text);
-	
+		window.clear();
+		window.draw(tex);
+		window.draw(rect);
 
-	window.display();
+		window.draw(uInput);
+		window.draw(text);
+
+
+		window.display();
 	}
 }
 
