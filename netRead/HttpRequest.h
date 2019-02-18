@@ -10,10 +10,7 @@ class HttpRequest
 {
 private:
 	std::string EMAIL = "martin.karlsson@stud.sti.se";
-	std::string ID = "martin";
-	std::string FILEENDING = ".csv";
-	std::string SENDURI = "/services/sendform.aspx?xdata=" + EMAIL + "|" + ID + "|";
-	std::string URI = "/services/data/" + EMAIL + "-" + ID + FILEENDING;
+	std::string SENDURI = "/services/sendform.aspx?xdata=" + EMAIL + "|";
 	std::string HOSTNAME = "primat.se";
 	unsigned short PORT = 80;
 
@@ -24,8 +21,8 @@ private:
 public:
 	HttpRequest();
 
-	void postToServer(int data1,int data2);
-	std::string readFromServer();
+	std::string postToServer(std::string ID, int data1, int data2);
+	std::string readFromServer(std::string ID);
 
 	//void httpUpdate();
 	//void httpDraw();

@@ -3,10 +3,8 @@
 
 
 
-
-
 #if 1
-#define LOG(x) std::cout<<x<<std::endl
+#define LOG(x) std::cout << x << "\n"
 #else
 #define LOG(x)
 #endif // 0
