@@ -8,6 +8,7 @@
 constexpr int HEIGTH = 1200;
 constexpr int WIDTH = 738;
 
+
 int main()
 {
 	srand(time(NULL));
@@ -25,23 +26,15 @@ int main()
 		std::cerr << "Failed to load font\n";
 	}
 
-
-	text.setFont(font);
 	text2.setFont(font);
-	responseText.setFont(font);
-
-	text.setCharacterSize(16);
 	text2.setCharacterSize(16);
-	responseText.setCharacterSize(16);
-
-	text.setFillColor(sf::Color::Red);
 	text2.setFillColor(sf::Color::Blue);
-	responseText.setFillColor(sf::Color::Blue);
-	text.setPosition(sf::Vector2f(100.f, 0.f));
 	text2.setPosition(sf::Vector2f(0.f, 0.f));
+
+	responseText.setFont(font);
+	responseText.setCharacterSize(16);
+	responseText.setFillColor(sf::Color::Blue);
 	responseText.setPosition(sf::Vector2f(0.f, 20.f));
-
-
 
 	sf::RectangleShape rect;
 	rect.setFillColor(sf::Color::Transparent);
@@ -50,9 +43,8 @@ int main()
 
 	sf::String temp, responseString, temp3;
 
-
 	HttpRequest req;
-	std::string a = "";
+
 	view.reset(sf::FloatRect(0, 0, HEIGTH, WIDTH));
 	view.setCenter(HEIGTH / 2, WIDTH / 2);
 

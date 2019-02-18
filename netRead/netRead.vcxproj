@@ -125,10 +125,12 @@
   <ItemGroup>
     <ClCompile Include="HttpRequest.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="resourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defines.hpp" />
     <ClInclude Include="HttpRequest.h" />
+    <ClInclude Include="resourceManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
